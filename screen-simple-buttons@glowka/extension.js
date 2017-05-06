@@ -1,3 +1,4 @@
+// Copyright (c) 2017 Tomasz Główka
 // Copyright (c) 2016 Daniel Brall
 // Licensed under GPLv2 (gnome shell is in this license)
 
@@ -13,7 +14,7 @@ let _oskButtonEventHandler;
 let _oskA11yApplicationsSettings;
 
 function _toggleKeyboard() {
-    if(Main.keyboard._keyboardVisible) {
+    if (Main.keyboard._keyboardVisible) {
         Main.keyboard.Hide();
     } else {
         // currently this needs two clicks. I would have to delay the execution otherwise:
@@ -29,14 +30,19 @@ function init() {
 function enable() {
     _oskA11yApplicationsSettings = new Gio.Settings({ schema_id: A11Y_APPLICATIONS_SCHEMA });
 
-    _oskButton = new St.Bin({ style_class: 'panel-button',
-                            reactive: true,
-                            can_focus: true,
-                            x_fill: true,
-                            y_fill: false,
-                            track_hover: true });
-    let icon = new St.Icon({ icon_name: 'format-text-bold-symbolic',
-                            style_class: 'system-status-icon' });
+    _oskButton = new St.Bin({
+        style_class: 'panel-button',
+        reactive: true,
+        can_focus: true,
+        x_fill: true,
+        y_fill: false,
+        track_hover: true
+    });
+
+    const icon = new St.Icon({
+        icon_name: 'preferences-desktop-keyboard-shortcuts',
+        style_class: 'system-status-icon'
+    });
 
     _oskButton.set_child(icon);
     _oskButtonEventHandler = _oskButton.connect('button-press-event', _toggleKeyboard);

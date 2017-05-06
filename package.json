@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-gjs": "^1.0.4",
+    "gjs": "^0.1.0"
+  }
+}

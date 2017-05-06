@@ -1,0 +1,4 @@
+{
+    "plugins": ["gjs"],
+    "extends": [ "plugin:gjs/extension" ]
+}
