@@ -114,6 +114,8 @@ function enable() {
 
 function disable() {
     Main.panel._rightBox.remove_child(_oskButton);
+    Main.panel._rightBox.remove_child(_rotateHorizontalButton);
+    Main.panel._rightBox.remove_child(_rotateVerticalButton);
 
     _oskButton.disconnect(_oskButtonEventHandler);
     _oskButton = null;
