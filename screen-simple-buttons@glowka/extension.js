@@ -5,6 +5,7 @@
 const St = imports.gi.St;
 const Main = imports.ui.main;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 
 const A11Y_APPLICATIONS_SCHEMA = 'org.gnome.desktop.a11y.applications';
 const SHOW_KEYBOARD = 'screen-keyboard-enabled';
@@ -13,11 +14,23 @@ let _oskButton;
 let _oskButtonEventHandler;
 let _oskA11yApplicationsSettings;
 
+
+
 function _toggleKeyboard() {
     if (Main.keyboard._keyboardVisible) {
         Main.keyboard.Hide();
+
+        // Deactivate OSK after five minutes - it will take a bit longer to appear,
+        // but no false appearances due to the changed setting
+        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000 * 60 * 5, function() {
+            print('doing');
+            _oskA11yApplicationsSettings.set_boolean(SHOW_KEYBOARD, false);
+            Main.keyboard._sync();
+            print('done');
+        }, null);
+
     } else {
-        // currently this needs two clicks. I would have to delay the execution otherwise:
+        // Make sure appropriate setting is set
         _oskA11yApplicationsSettings.set_boolean(SHOW_KEYBOARD, true);
         Main.keyboard._sync();
         Main.keyboard.Show();
