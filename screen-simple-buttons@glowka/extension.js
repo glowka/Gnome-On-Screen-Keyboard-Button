@@ -58,7 +58,7 @@ function enable() {
     _oskA11yApplicationsSettings = new Gio.Settings({ schema_id: A11Y_APPLICATIONS_SCHEMA });
 
     _oskButton = new St.Bin({
-        style_class: 'panel-button',
+        style_class: 'panel-button panel-button-margined',
         reactive: true,
         can_focus: true,
         x_fill: true,
@@ -67,7 +67,7 @@ function enable() {
     });
 
     _rotateHorizontalButton = new St.Bin({
-        style_class: 'panel-button',
+        style_class: 'panel-button panel-button-margined',
         reactive: true,
         can_focus: true,
         x_fill: true,
@@ -76,7 +76,7 @@ function enable() {
     });
 
     _rotateVerticalButton = new St.Bin({
-        style_class: 'panel-button',
+        style_class: 'panel-button panel-button-margined',
         reactive: true,
         can_focus: true,
         x_fill: true,
@@ -85,17 +85,17 @@ function enable() {
     });
 
     const icon = new St.Icon({
-        icon_name: 'preferences-desktop-keyboard-shortcuts',
+        icon_name: 'input-keyboard-symbolic',
         style_class: 'system-status-icon'
     });
 
     const rotateHorizontalIcon = new St.Icon({
-        icon_name: 'video-display',
+        icon_name: 'video-display-symbolic',
         style_class: 'system-status-icon'
     });
 
     const rotateVerticalIcon = new St.Icon({
-        icon_name: 'pda',
+        icon_name: 'pda-symbolic',
         style_class: 'system-status-icon'
     });
 
@@ -107,9 +107,9 @@ function enable() {
     _rotateHorizontalButtonEventHandler = _rotateHorizontalButton.connect('button-press-event', _rotateHorizontal);
     _rotateVerticalButtonEventHandler = _rotateVerticalButton.connect('button-press-event', _rotateVertical);
 
-    Main.panel._rightBox.insert_child_at_index(_oskButton, 0);
     Main.panel._rightBox.insert_child_at_index(_rotateHorizontalButton, 0);
     Main.panel._rightBox.insert_child_at_index(_rotateVerticalButton, 0);
+    Main.panel._rightBox.insert_child_at_index(_oskButton, 0);
 }
 
 function disable() {
